@@ -66,7 +66,6 @@
         <?php include "./link.php"; ?>
     </footer>
 </div>
-
 <script>
 document.getElementById('searchForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -104,17 +103,25 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
             data.results.forEach(result => {
                 const resultCard = document.createElement('div');
                 resultCard.className = 'bg-gray-50 p-4 rounded-md shadow-sm';
-                resultCard.innerHTML = `
+
+                let resultHTML = `
                     <h3 class="text-lg font-semibold mb-2">Result Roll: ${result.roll}</h3>
                     <ul class="list-disc list-inside space-y-1">
-                        ${Object.entries(result.data).map(([key, value]) => `
-                            <li>
-                                <strong class="capitalize">${key}:</strong>
-                                ${Array.isArray(value) ? value.join(', ') : value}
-                            </li>
-                        `).join('')}
-                    </ul>
                 `;
+
+                Object.entries(result.data).forEach(([key, value]) => {
+                    const displayKey = key.toLowerCase() === "subjects" ? "Refer Subject" : key;
+                    resultHTML += `
+                        <li>
+                            <strong class="capitalize">${displayKey}:</strong>
+                            ${Array.isArray(value) ? value.join(', ') : value}
+                        </li>
+                    `;
+                });
+
+                resultHTML += `</ul>`;
+
+                resultCard.innerHTML = resultHTML;
                 resultContainer.appendChild(resultCard);
             });
             resultContainer.classList.remove('hidden');
