@@ -11,6 +11,36 @@
             display: none;
         }
     </style>
+
+<?php
+
+$currentDomain = $_SERVER['HTTP_HOST'];
+
+if ($currentDomain === 'bijoydev.com') {
+    echo '<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXTJN2ZSCN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag(\'js\', new Date());
+
+  gtag(\'config\', \'G-YXTJN2ZSCN\');
+</script>';
+} elseif ($currentDomain === 'btebresult.online') {
+    echo '<script async src="https://www.googletagmanager.com/gtag/js?id=G-TH25K29W5L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag(\'js\', new Date());
+
+  gtag(\'config\', \'G-TH25K29W5L\');
+</script>';
+} else {
+    // Optional: Add a default or no tracking code here
+    // echo '';
+}
+
+?>
+
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
 
